@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Você quer lavar a louça hoje?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #cc2b5e, #753a88); /* Romantic gradient */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Prevents scrollbars */
+        }
+
+        .wrapper {
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .box h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for better readability */
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .buttons button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            background: linear-gradient(135deg, #ff6b6b, #f06595); /* Romantic gradient */
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            outline: none;
+            position: relative;
+        }
+
+        .buttons button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Cool heart animation */
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .buttons .buttonSim::before {
+            content: '😍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            animation: heartBeat 1s infinite;
+        }
+
+        .buttons .buttonNao::before {
+            content: '😡';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            animation: heartBeat 1s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="box">
+            <h1>Você quer lavar a louça hoje?</h1>
+            <div class="buttons">
+                <button class="buttonSim">Sim</button>
+                <button class="buttonNao" id="randomButton">Não</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const button = document.getElementById('randomButton');
+        const moveDistance = 150; // Adjusted distance in pixels
+
+        button.addEventListener('mouseover', () => {
+            // Generate a random angle between 0 and 2π radians
+            const angle = Math.random() * 2 * Math.PI;
+
+            // Calculate the X and Y components for movement
+            const dx = Math.cos(angle);
+            const dy = Math.sin(angle);
+
+            // Normalize the vector to ensure a consistent movement distance
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const translateX = (dx / length) * moveDistance;
+            const translateY = (dy / length) * moveDistance;
+
+            // Apply the translation to the button
+            button.style.transform = `translate(${translateX}px, ${translateY}px)`;
+        });
+    </script>
+</body>
+</html>
